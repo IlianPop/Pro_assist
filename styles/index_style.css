@@ -21,6 +21,7 @@ form input {
   border-radius: 5;
 }
 [type = 'text'], [type = 'password']{
+  padding: 5px;
   background-color: #76A8D4;
   border: none;
   width: 250px;
@@ -53,4 +54,8 @@ form input {
 }
 [type = 'submit']:hover{
   cursor: pointer;
+}
+input:-webkit-autofill {
+  background-color: #76A8D4 !important;
+  color: #315678 !important;
 }
