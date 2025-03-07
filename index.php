@@ -1,6 +1,7 @@
 <?php
   require_once "php/dbc.php";
   if(isset($_POST['login'])&&isset($_POST['pass'])){
+    session_start();
     $err = "";
     $query = $pdo->prepare('select * from users where login = ?');
     $query->bindValue(1, fixi($_POST['login']), PDO::PARAM_STR);
@@ -8,6 +9,11 @@
     if($query->rowcount()!=0){
       $res = $query->fetch();
       if(password_verify($_POST['pass'], $res['password'])){
+        $_SESSION['ID']=fixi($res['id']);
+        $_SESSION['STAT']=fixi($res['status']);
+        $_SESSION['NAME']=fixi($res['name']);
+        $_SESSION['MIDLE_NAME']=fixi($res['midle_name']);
+        $_SESSION['LAST_NAME']=fixi($res['last_name']);
         switch($res['status']){
           case('supadmin'):
             header("Location: php/supadmin.php");
@@ -41,6 +47,7 @@
   <head>
     <title>Сторінка входу</title>
     <link rel = 'stylesheet' href = 'styles/index_style.css'>
+    <link rel = 'icon' type="image/jpg" href="styles/system_images/site.png">
     <script src="JS/index.js" ></script>
   </head>
   <body>
