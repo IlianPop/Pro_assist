@@ -1,4 +1,5 @@
 <?php
+  session_cache_limiter('private_no_expire');
   require_once "php/dbc.php";
   if(isset($_POST['login'])&&isset($_POST['pass'])){
     session_start();
@@ -20,6 +21,10 @@
             exit();
             break;
           case('admin'):
+            $query = $pdo->prepare('select id from office where admin_id = ?');
+            $query->bindValue(1, $res['id'], PDO::PARAM_STR);
+            $query->execute();
+            $_SESSION['OID'] = $query->fetch()['id'];
             header("Location: php/admin.php");
             exit();
             break;

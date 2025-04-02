@@ -1,7 +1,8 @@
 <?php
+  session_cache_limiter('private_no_expire');
   require_once "dbc.php";
   session_start();
-  if($_SESSION['STAT']!='admin'){
+  if($_SESSION['STAT']!='admin'|| !isset($_SESSION['OID'])){
     header('Location: ../index.php');
     exit();
   }
@@ -54,7 +55,7 @@
         <br>
         <input type = 'text' name = 'number' placeholder="Кількість робочих місць" <?php if(isset($res['number']))echo("value = '{$res['number']}'"); ?>>
         <br>
-        <input type = 'hidden' name = 'oid' value = <?= $_POST['oid']?>>
+        <input type = 'hidden' name = 'oid' value = '<?= $_POST['oid']?>'>
         <input type = 'submit' value = 'Зберегти'>
         <?php if(isset($_POST['who'])){ ?>
           <input type = 'hidden' name = 'who' value = <?= $_POST['who'] ?>>

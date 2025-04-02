@@ -1,12 +1,11 @@
 <?php
   require_once "dbc.php";
   session_start();
-
-  if($_SESSION['STAT']!='admin'|| !isset($_SESSION['OID']) ){
+  if($_SESSION['STAT']!='admin'){
     header('Location: ../index.php');
     exit();
   }
-  $query = $pdo->prepare('select * from office where admin_id = ?');
+  $query = $pdo->prepare('select * from room where admin_id = ?');
   $query->bindValue(1, fixi($_SESSION['ID']), PDO::PARAM_INT);
   $query->execute();
   $res = $query->fetch();
@@ -28,10 +27,8 @@
         <h1 id = "office_info"><?= fixi($res['name']) ?></h1>
       </div>
       <form action = "add_edit_room.php" method="post" class = "object1">
+        <input type = 'hidden' name = 'oid' value="<?= $res['id'] ?>">
         <input type = 'submit' value = '+'>
-      </form>
-      <form action = "workers_list.php" method="post" class = "object1">
-        <input type = 'submit' value = 'персонал'>
       </form>
       <?php if($query->rowCount()){while($row = $query->fetch()){?>
         <div class="object1">
@@ -46,6 +43,7 @@
             <input class = 'hided' type = 'submit' value="">
           </form>
           <form method = "post" action = "add_edit_room.php" class = 'upp'>
+            <input type = 'hidden' name = 'oid' value = <?=$res['id']?>>
             <input type = 'hidden' name = 'who' value = <?=$row['id']?>>
             <input class= "room_edit" type = 'submit' value= "Редагувати" >
           </form>

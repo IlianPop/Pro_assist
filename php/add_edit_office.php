@@ -1,4 +1,5 @@
 <?php
+  session_cache_limiter('private_no_expire');
   require_once "dbc.php";
   session_start();
   if($_SESSION['STAT']!='supadmin'){

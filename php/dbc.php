@@ -17,7 +17,7 @@
   try{
     $pdo = new PDO($attr, $user, $pass, $opts);
   }
-  catch(PDOExceptoin $e){
+  catch(PDOException $e){
     die("Проблекми з базою");
   }
  ?>
