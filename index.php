@@ -28,12 +28,20 @@
             header("Location: php/admin.php");
             exit();
             break;
-          case('employee'):
-            header("Location: php/employye.php");
+          case('working'):
+            $query = $pdo->prepare('select room_workers.office_id as id from users join room_workers on users.id = room_workers.user_id where users.id = ?');
+            $query->bindValue(1, $res['id'], PDO::PARAM_STR);
+            $query->execute();
+            $_SESSION['OID'] = $query->fetch()['id'];
+            header("Location: php/employee.php");
             exit();
             break;
-          case('staff'):
-            header("Location: php/staff.php");
+          case('service'):
+            $query = $pdo->prepare('select rob_graphik.office_id as id from users join rob_graphik on users.id = rob_graphik.user_id where users.id = ?');
+            $query->bindValue(1, $res['id'], PDO::PARAM_STR);
+            $query->execute();
+            $_SESSION['OID'] = $query->fetch()['id'];
+            header("Location: php/service.php");
             exit();
             break;
         }

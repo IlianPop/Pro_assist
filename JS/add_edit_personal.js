@@ -50,7 +50,7 @@ function validate(form){
   else{
     form.mail.style.border = "none";
   }
-  if(!form.changes || form.pass.value != ""){
+  if(form.changes || form.pass.value != ""){
     if(!/[A-Z]/.test(form.pass.value) || !/[a-z]/.test(form.pass.value) || !/[0-1]/.test(form.pass.value)){
       form.pass.style.borderBottom = "2px solid rgba(219, 109, 13, 0.7)";
       err++;

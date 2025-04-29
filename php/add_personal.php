@@ -83,10 +83,10 @@
       echo("sysh()");
     }?>
 </script>
-  <link rel = 'stylesheet' href = '../styles/add_edit_office.css'>
+  <link rel = 'stylesheet' href = '../styles/add_edit_personal.css'>
 </head>
 <body>
-  <div class = 'form-container'>
+  <div id = 'form-container'>
     <form method = 'post' action = 'add_personal.php' onsubmit="return(validate(this))">
       <label>
         <input type = 'radio' name = 'who' onclick="sysh()" <?php if(!isset($monday))echo("checked = 'checked'");?> value = 'working'>Робочий персонал<br>
@@ -111,24 +111,31 @@
       <div id = 'sys' style="
       <?php if(isset($monday))echo('display: block');else{echo('display: none');}?>">
         <input type = 'text' name = 'role' placeholder = 'Вид діяльності' <?php if(isset($err))echo("value = '{$_POST['role']}'")?>>
+        <br>
         <label>
           <input type = 'checkbox' name = 'days[]' value = 'monday' <?php if(isset($monday) && $monday==1)echo("checked = 'checked'")?>>Понеділок
         </label>
+        <br>
         <label>
           <input type = 'checkbox' name = 'days[]' value = 'tuesday' <?php if(isset($tuesday) && $tuesday==1)echo("checked = 'checked'")?>>Вівторок
         </label>
+        <br>
         <label>
           <input type = 'checkbox' name = 'days[]' value = 'wednesday' <?php if(isset($wednesday) && $wednesday==1)echo("checked = 'checked'")?>>Середа
         </label>
+        <br>
         <label>
-          <input type = 'checkbox' name = 'days[]' value = 'thursday' <?php if(isset($thursday) && $thursday==1)echo("checked = 'checked'")?>>Четверг<br>
+          <input type = 'checkbox' name = 'days[]' value = 'thursday' <?php if(isset($thursday) && $thursday==1)echo("checked = 'checked'")?>>Четверг
         </label>
+        <br>
         <label>
         <input type = 'checkbox' name = 'days[]' value = 'friday' <?php if(isset($friday) && $friday==1)echo("checked = 'checked'")?>>Пятниця
         </label>
+        <br>
         <label>
           <input type = 'checkbox' name = 'days[]' value = 'saturday' <?php if(isset($saturday) && $saturday==1)echo("checked = 'checked'")?>>Субота
         </label>
+        <br>
         <label>
         <input type = 'checkbox' name = 'days[]' value = 'sunday' <?php if(isset($sunday) && $sunday==1)echo("checked = 'checked'")?>>Неділя
         </label>

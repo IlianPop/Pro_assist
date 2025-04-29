@@ -37,7 +37,7 @@
     $query->bindValue(5, fixi($_POST['mail']), PDO::PARAM_STR);
     $query->bindValue(6, $_POST['who'], PDO::PARAM_INT);
     $query->execute();
-    if(isset($_POST['pass'])){
+    if($_POST['pass']!=''){
       $query = $pdo->prepare('update users set pass = ? where id = ?');
       $query->bindValue(1, password_hash($_POST['pass'], PASSWORD_DEFAULT), PDO::PARAM_STR);
       $query->bindValue(2, $_POST['who'], PDO::PARAM_INT);
@@ -51,12 +51,12 @@
 <html>
   <head>
     <title>Редагування робочого</title>
-    <link rel = 'stylesheet' href = '../styles/add_edit_office.css'>
+    <link rel = 'stylesheet' href = '../styles/add_edit_personal.css'>
     <link rel = 'icon' type="image/jpg" href="../styles/system_images/site.png">
     <script src="../JS/add_edit_personal.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div id="form-container">
       <form method = 'post' action = 'edit_personal.php' onsubmit="return(validate(this))">
         <input type = 'hidden' name = 'who' value="<?= $_POST['who'] ?>">
         <input type = 'text' name = 'name' placeholder="Ім'я" value = '<?= $res['name'] ?>'>

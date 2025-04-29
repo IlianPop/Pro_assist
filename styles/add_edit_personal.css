@@ -1,0 +1,45 @@
+body {
+  background-image: url('system_images/background.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+#form-container{
+  background-color: #AAC8E3;
+  max-height: 90vh;
+  padding: 2vh;
+  border-radius: 9px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+[type = 'text'], [type = 'password']{
+  padding: 5px;
+  background-color: #76A8D4;
+  border: none;
+  width: 40vh;
+  height: 5vh;
+  margin-bottom: 15px;
+  border-radius: 18px;
+  font-size: 32px;
+  color: #315678;
+  opacity: 1;
+}
+[type = 'submit']{
+  background-color: #57728A;
+  width: 40vh;
+  height: 5vh;
+  padding: 5px;
+  border: none;
+  border-radius: 18px;
+  font-size: 32px;
+  margin-top: 2vh;
+}

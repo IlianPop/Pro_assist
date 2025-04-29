@@ -1,0 +1,57 @@
+body {
+  background-image: url('system_images/background.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+#list_container {
+  background-color: #AAC8E3;
+  width: 70vh;
+  height: 40vh;
+  padding: 15vh;
+  border-radius: 9px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+#flow{
+  overflow-y: auto;
+  height: 50vh;
+  position: relative;
+  flex-shrink: 0;
+  margin-top: -7vh;
+}
+[value = 'Додати']{
+  position: relative;
+  bottom: 10vh;
+  display: flex;
+  padding: 2vh;
+  background-color: #57728A;
+  border: none;
+  border-radius: 9px;
+}
+.item_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #57728A;
+  padding: 3vh;
+  border-radius: 9px;
+  margin: 2vh;
+  width: 80vh;
+  position: relative;
+  bottom: 4vh;
+}
+[value = 'Редагувати']{
+  padding: 2vh;
+  background-color: #AAC8E3;
+  border: none;
+  border-radius: 9px;
+}

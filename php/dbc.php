@@ -1,8 +1,8 @@
 <?php
   $host = 'localhost';
-  $data = 'proassist';
+  $data = 'test1';
   $user = 'root';
-  $pass = 'mysql';
+  $pass = 'Aq1Aq1';
   $chrs = 'utf8mb4';
   $attr = "mysql:host=$host;dbname=$data;charset=$chrs";
   $opts =

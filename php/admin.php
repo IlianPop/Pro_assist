@@ -41,7 +41,7 @@
             <h4><?= $row['title'] ?></h4>
             <br>
           </div>
-          <form method = 'post' action = "add_edit_personal.php">
+          <form method = 'post' action = "fill_room.php">
             <input type = 'hidden' name = 'who' value = <?=$row['id']?>>
             <input class = 'hided' type = 'submit' value="">
           </form>

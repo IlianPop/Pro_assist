@@ -6,14 +6,19 @@
     header('Location: ../index.php');
     exit();
   }
-  if(isset($_POST['title']) && !isset($_POST['changes']) && !isset($_POST['delete'])){
-    $query1 = $pdo->prepare('insert into rooms (id, office_id, number, title) values(null, ?, ?, ?);');
-    $query1->bindValue(1, fixi($_POST['oid']), PDO::PARAM_INT);
-    $query1->bindValue(2, fixi($_POST['number']), PDO::PARAM_INT);
-    $query1->bindValue(3, fixi($_POST['title']), PDO::PARAM_STR);
-    $query1->execute();
-    header('Location: admin.php');
-    exit();
+  try{
+    if(isset($_POST['title']) && !isset($_POST['changes']) && !isset($_POST['delete'])){
+      $query1 = $pdo->prepare('insert into rooms (id, office_id, number, title) values(null, ?, ?, ?);');
+      $query1->bindValue(1, fixi($_SESSION['OID']), PDO::PARAM_INT);
+      $query1->bindValue(2, fixi($_POST['number']), PDO::PARAM_INT);
+      $query1->bindValue(3, fixi($_POST['title']), PDO::PARAM_STR);
+      $query1->execute();
+      header('Location: admin.php');
+      exit();
+    }
+  }
+  catch(PDOException $e){
+    die($e);
   }
   if(isset($_POST['who'])&&isset($_POST['changes'])){
     $query1 = $pdo->prepare('update rooms set office_id = ?, number = ?, title = ? where id = ?');
@@ -27,6 +32,10 @@
     exit();
   }
   if(isset($_POST['who'])&&isset($_POST['delete'])){
+    $query1 = $pdo->prepare('update room_workers set room_id = ? where room_id = ?');
+    $query1->bindValue(1, null, PDO::PARAM_NULL);
+    $query1->bindValue(2, fixi($_POST['who']), PDO::PARAM_INT);
+    $query1->execute();
     $query1 = $pdo->prepare('delete from rooms where id = ?');
     $query1->bindValue(1, fixi($_POST['who']), PDO::PARAM_INT);
     $query1->execute();
