@@ -1,5 +1,5 @@
 body {
-  background-image: url('system_images/background.png');
+  background-image: url("system_images/background.png");
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -9,7 +9,7 @@ body {
   margin: 0;
 }
 #list_container {
-  background-color: #AAC8E3;
+  background-color: #aac8e3;
   width: 70vh;
   height: 40vh;
   padding: 15vh;
@@ -21,19 +21,19 @@ body {
   overflow-x: hidden;
   overflow-y: hidden;
 }
-#flow{
+#flow {
   overflow-y: auto;
   height: 50vh;
   position: relative;
   flex-shrink: 0;
   margin-top: -7vh;
 }
-[value = 'Додати']{
+[value="Додати"] {
   position: relative;
   bottom: 10vh;
   display: flex;
   padding: 2vh;
-  background-color: #57728A;
+  background-color: #57728a;
   border: none;
   border-radius: 9px;
 }
@@ -41,7 +41,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #57728A;
+  background-color: #57728a;
   padding: 3vh;
   border-radius: 9px;
   margin: 2vh;
@@ -49,9 +49,42 @@ body {
   position: relative;
   bottom: 4vh;
 }
-[value = 'Редагувати']{
+[value="Редагувати"] {
   padding: 2vh;
-  background-color: #AAC8E3;
+  background-color: #aac8e3;
   border: none;
   border-radius: 9px;
+}
+#left_container {
+  background-color: #aac8e3;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: fixed;
+  left: 0;
+  width: 10vh;
+  height: 40vh;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0px 9px 9px 0px;
+}
+#home {
+  background: url("./system_images/home.svg");
+  width: 5vh;
+  height: 5vh;
+  background-size: cover;
+  opacity: 0.6;
+  position: relative;
+  top: 3vh;
+  left: 2vh;
+  border: none;
+}
+#plus {
+  background: url("./system_images/plus.svg");
+  width: 5vh;
+  height: 5vh;
+  background-size: cover;
+  opacity: 0.6;
+  position: relative;
+  left: 2vh;
+  top: 27vh;
+  border: none;
 }

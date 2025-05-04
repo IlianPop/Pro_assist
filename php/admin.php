@@ -6,6 +6,14 @@
     header('Location: ../index.php');
     exit();
   }
+  if(isset($_POST['exit'])){
+    unset($_SESSION['STAT']);
+    unset($_SESSION['NAME']);
+    unset($_SESSION['MIDLE_NAME']);
+    unset($_SESSION['LAST_NAME']);
+    header('Location: ../index.php');
+    exit();
+  }
   $query = $pdo->prepare('select * from office where admin_id = ?');
   $query->bindValue(1, fixi($_SESSION['ID']), PDO::PARAM_INT);
   $query->execute();
@@ -27,12 +35,6 @@
         <h1 id = "name_info"><?= fixi($_SESSION['LAST_NAME'] . " " . $_SESSION['NAME'] . " " . $_SESSION['MIDLE_NAME']) ?></h1>
         <h1 id = "office_info"><?= fixi($res['name']) ?></h1>
       </div>
-      <form action = "add_edit_room.php" method="post" class = "object1">
-        <input type = 'submit' value = '+'>
-      </form>
-      <form action = "workers_list.php" method="post" class = "object1">
-        <input type = 'submit' value = 'персонал'>
-      </form>
       <?php if($query->rowCount()){while($row = $query->fetch()){?>
         <div class="object1">
           <div class = 'room_info'>
@@ -52,4 +54,20 @@
         </div>
       <?php }}?>
     </div>
+    <div id = 'left_container'>
+      <form method = 'post' action = 'hand_made.php'>
+        <input type = 'hidden' name = 'who' value = ''>
+        <input id = 'hand_made_setting' type = 'submit' value = ''>
+      </form>
+      <form action = "add_edit_room.php" method="post">
+        <input id = 'plus' type = 'submit' value = ''>
+      </form>
+      <form action = "workers_list.php" method="post">
+        <input id = 'pers' type = 'submit' value = ''>
+      </form>
+      <form action = "" method="post">
+        <input id = 'exit' type = 'submit' value = '' name = 'exit'>
+      </form>
+    </div>
+  </body>
 </html>

@@ -2,6 +2,10 @@
 	require_once "dbc.php";
   session_cache_limiter('private_no_expire');
   	session_start();
+    if(isset($_POST['exit'])){
+      header('Location: admin.php');
+      exit();
+    }
   	if($_SESSION['STAT']!='admin'|| !isset($_SESSION['OID']) || !isset($_POST['who'])){
     	header('Location: ../index.php');
     	exit();
@@ -39,6 +43,10 @@
       <?php } ?>
       </div>
     </div>
-    
+    <div id = 'left_container'>
+      <form method = 'post' action = ''>
+        <input id = 'home' type = 'submit' value = '' name = 'exit'>
+      </form>
+    </div>
   </body>
 </html>

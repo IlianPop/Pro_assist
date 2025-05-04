@@ -5,6 +5,10 @@
     header('Location: ../index.php');
     exit();
   }
+  if(isset($_POST['exit'])){
+    header('Location: admin.php');
+    exit();
+  }
   if(isset($_POST['name'])){
     if($_POST['who'] == "working"){
       try{
@@ -21,7 +25,7 @@
         $query->bindValue(1, $pdo->lastInsertId(), PDO::PARAM_INT);
         $query->bindValue(2, $_SESSION['OID'], PDO::PARAM_INT);
         $query->execute();
-        header('Location: workers_list.php');
+        header('Location: admin.php');
         exit();
       }
       catch(PDOException $e){
@@ -142,6 +146,11 @@
       </div>
       <input type = 'submit' value = 'Зареєструвати'>
       <?php if(isset($err))echo($err);?>
+    </form>
+  </div>
+  <div id = 'left_container'>
+    <form method = 'post' action = ''>
+      <input id = 'home' type = 'submit' value = '' name = 'exit'>
     </form>
   </div>
 </body>

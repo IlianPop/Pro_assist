@@ -2,6 +2,10 @@
 	require_once "dbc.php";
 	session_cache_limiter('private_no_expire');
   	session_start();
+	if(isset($_POST['exit'])){
+		header('Location: admin.php');
+		exit();
+	}
   	if($_SESSION['STAT']!='admin'|| !isset($_SESSION['OID']) || !isset($_POST['who'])){
     	header('Location: ../index.php');
     	exit();
@@ -11,6 +15,7 @@
   		$query2->bindValue(1, null, PDO::PARAM_NULL);
   		$query2->bindValue(2, $_POST['who1'], PDO::PARAM_INT);
   		$query2->execute();
+		header('Location: admin.php');
   	}
   	$query = $pdo->prepare('select users.id as id, users.name as name, users.last_name as last_name, users.midle_name as midle_name from room_workers join users on room_workers.user_id = users.id where room_workers.room_id = ?');
   	$query->bindValue(1, $_POST['who'], PDO::PARAM_INT);
@@ -48,5 +53,10 @@
 			</div>
 		<?php } ?>
 	</div>
+	<div id = 'left_container'>
+      <form method = 'post' action = ''>
+        <input id = 'home' type = 'submit' value = '' name = 'exit'>
+      </form>
+    </div>
 </body>
 </html>

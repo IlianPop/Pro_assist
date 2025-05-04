@@ -32,7 +32,6 @@
 					<a href = 'request_view.php?who=<?= $row['id'] ?>'><button type = 'button'>Детальніше</button></a>
 				</div>
 			<?php }} ?>
-			<h4><?= $_SESSION['ID'] ?></h4>
 		</div>
 	</div>
 </body>

@@ -6,6 +6,10 @@
     header('Location: ../index.php');
     exit();
   }
+  if(isset($_POST['exit'])){
+    header('Location: admin.php');
+    exit();
+  }
   if(!isset($_POST['who'])){
     header('Location: admin.php');
     exit();
@@ -25,7 +29,7 @@
     $query = $pdo->prepare('delete users, rob_graphik, room_workers from users left join rob_graphik on users.id = rob_graphik.user_id left join room_workers on users.id = room_workers.user_id where users.id = ?');
     $query->bindParam(1, $_POST['who'], PDO::PARAM_INT, 1000);
     $query->execute();
-    header('Location: workers_list.php');
+    header('Location: admin.php');
     exit();
   }
   if(isset($_POST['name'])){
@@ -43,7 +47,7 @@
       $query->bindValue(2, $_POST['who'], PDO::PARAM_INT);
       $query->execute();
     }
-    header('Location: workers_list.php');
+    header('Location: admin.php');
     exit();
   }
 ?>
@@ -104,6 +108,11 @@
         <input type = 'hidden' name = 'who' value="<?= $_POST['who'] ?>">
         <input type = 'hidden' name = 'delete' value='true'>
         <input type="submit" value="Видалити">
+      </form>
+    </div>
+    <div id = 'left_container'>
+      <form method = 'post' action = ''>
+        <input id = 'home' type = 'submit' value = '' name = 'exit'>
       </form>
     </div>
   </body>

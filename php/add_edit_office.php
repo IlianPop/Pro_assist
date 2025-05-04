@@ -1,61 +1,78 @@
 <?php
   session_cache_limiter('private_no_expire');
+  $error1=0;
   require_once "dbc.php";
   session_start();
   if($_SESSION['STAT']!='supadmin'){
     header('Location: ../index.php');
     exit();
   }
-  if(isset($_POST['title']) && !isset($_POST['changes']) && !isset($_POST['delete'])){
-    $query1 = $pdo->prepare('insert into users (id, name, last_name, midle_name, login, mail, password, status) values(null, ?, ?, ?, ?, ?, ?, ?)');
-    $query1->bindValue(1, fixi($_POST['name']), PDO::PARAM_STR);
-    $query1->bindValue(2, fixi($_POST['last_name']), PDO::PARAM_STR);
-    $query1->bindValue(3, fixi($_POST['midle_name']), PDO::PARAM_STR);
-    $query1->bindValue(4, fixi($_POST['login']), PDO::PARAM_STR);
-    $query1->bindValue(5, fixi($_POST['mail']), PDO::PARAM_STR);
-    $query1->bindValue(6, password_hash($_POST['pass'], PASSWORD_DEFAULT), PDO::PARAM_STR);
-    $query1->bindValue(7, "admin", PDO::PARAM_STR);
-    $query1->execute();
-    $id1 = $pdo->lastInsertId();
-    $query1 = $pdo->prepare('insert into office (id, admin_id, name) values(null, ?, ?)');
-    $query1->bindValue(1, $id1, PDO::PARAM_INT);
-    $query1->bindValue(2, $_POST['title'], PDO::PARAM_STR);
-    $query1->execute();
+  if(isset($_POST['home'])){
     header('Location: supadmin.php');
     exit();
   }
-  if(isset($_POST['who'])&&isset($_POST['changes'])){
-    $query1 = $pdo->prepare('select office.*, office.id as oid, users.* from office join users where office.id = ? and users.id = office.admin_id');
-    $query1->bindParam(1, $_POST['who'], PDO::PARAM_INT, 1000);
-    $query1->execute();
-    $res = $query1->fetch();
-    $query = 'update users set name = ?, last_name = ?, midle_name = ?, login = ?, mail = ? ';
-    if(isset($_POST['pass'])){
-      $query .= ',`password` = ? where id = ?';
-    }
-    else{
-      $query .= 'where id = ?';
-    }
-    $query1 = $pdo->prepare($query);
-    $query1->bindValue(1, fixi($_POST['name']), PDO::PARAM_STR);
-    $query1->bindValue(2, fixi($_POST['last_name']), PDO::PARAM_STR);
-    $query1->bindValue(3, fixi($_POST['midle_name']), PDO::PARAM_STR);
-    $query1->bindValue(4, fixi($_POST['login']), PDO::PARAM_STR);
-    $query1->bindValue(5, fixi($_POST['mail']), PDO::PARAM_STR);
-    if(isset($_POST['pass'])){
+  if(isset($_POST['title']) && !isset($_POST['changes']) && !isset($_POST['delete'])){
+    try{
+      $query1 = $pdo->prepare('insert into users (id, name, last_name, midle_name, login, mail, password, status) values(null, ?, ?, ?, ?, ?, ?, ?)');
+      $query1->bindValue(1, fixi($_POST['name']), PDO::PARAM_STR);
+      $query1->bindValue(2, fixi($_POST['last_name']), PDO::PARAM_STR);
+      $query1->bindValue(3, fixi($_POST['midle_name']), PDO::PARAM_STR);
+      $query1->bindValue(4, fixi($_POST['login']), PDO::PARAM_STR);
+      $query1->bindValue(5, fixi($_POST['mail']), PDO::PARAM_STR);
       $query1->bindValue(6, password_hash($_POST['pass'], PASSWORD_DEFAULT), PDO::PARAM_STR);
-      $query1->bindValue(7, fixi($res['admin_id']), PDO::PARAM_INT);
+      $query1->bindValue(7, "admin", PDO::PARAM_STR);
+      $query1->execute();
+      $id1 = $pdo->lastInsertId();
+      $query1 = $pdo->prepare('insert into office (id, admin_id, name) values(null, ?, ?)');
+      $query1->bindValue(1, $id1, PDO::PARAM_INT);
+      $query1->bindValue(2, $_POST['title'], PDO::PARAM_STR);
+      $query1->execute();
+      header('Location: supadmin.php');
+      exit();
     }
-    else{
-      $query1->bindValue(6, fixi($res['admin_id']), PDO::PARAM_INT);
+    catch(PDOException $e){
+      $error1 = 1;
+      $res = array('title' => $_POST['title'], 'name' => $_POST['name'], 'last_name' => $_POST['last_name'], 'midle_name' => $_POST['midle_name'], 'login' => $_POST['login'], 'mail' => $_POST['mail']);
     }
-    $query1->execute();
-    $query1 = $pdo->prepare('update office set name = ? where id = ?');
-    $query1->bindValue(1, fixi($_POST['title']), PDO::PARAM_STR);
-    $query1->bindValue(2, fixi($res['oid']), PDO::PARAM_INT);
-    $query1->execute();
-    header('Location: supadmin.php');
-    exit();
+  }
+  if(isset($_POST['who'])&&isset($_POST['changes'])){
+    try{
+      $query1 = $pdo->prepare('select office.*, office.id as oid, users.* from office join users where office.id = ? and users.id = office.admin_id');
+      $query1->bindParam(1, $_POST['who'], PDO::PARAM_INT, 1000);
+      $query1->execute();
+      $res = $query1->fetch();
+      $query = 'update users set name = ?, last_name = ?, midle_name = ?, login = ?, mail = ? ';
+      if(isset($_POST['pass'])){
+        $query .= ',`password` = ? where id = ?';
+      }
+      else{
+        $query .= 'where id = ?';
+      }
+      $query1 = $pdo->prepare($query);
+      $query1->bindValue(1, fixi($_POST['name']), PDO::PARAM_STR);
+      $query1->bindValue(2, fixi($_POST['last_name']), PDO::PARAM_STR);
+      $query1->bindValue(3, fixi($_POST['midle_name']), PDO::PARAM_STR);
+      $query1->bindValue(4, fixi($_POST['login']), PDO::PARAM_STR);
+      $query1->bindValue(5, fixi($_POST['mail']), PDO::PARAM_STR);
+      if(isset($_POST['pass'])){
+        $query1->bindValue(6, password_hash($_POST['pass'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+        $query1->bindValue(7, fixi($res['admin_id']), PDO::PARAM_INT);
+      }
+      else{
+        $query1->bindValue(6, fixi($res['admin_id']), PDO::PARAM_INT);
+      }
+      $query1->execute();
+      $query1 = $pdo->prepare('update office set name = ? where id = ?');
+      $query1->bindValue(1, fixi($_POST['title']), PDO::PARAM_STR);
+      $query1->bindValue(2, fixi($res['oid']), PDO::PARAM_INT);
+      $query1->execute();
+      header('Location: supadmin.php');
+      exit();
+    }
+    catch(PDOException $e){
+      $error1 = 1;
+      $res = array('title' => $_POST['title'], 'name' => $_POST['name'], 'last_name' => $_POST['last_name'], 'midle_name' => $_POST['midle_name'], 'login' => $_POST['login'], 'mail' => $_POST['mail']);
+    }
   }
   if(isset($_POST['who'])&&isset($_POST['delete'])){
     $query1 = $pdo->prepare('select users.id as uid, office.id as oid from office join users where office.id = ? and users.id = office.admin_id');
@@ -117,7 +134,15 @@
           <input type = 'hidden' name = 'who' value = '<?= fixi($_POST['who']) ?>'>
           <input type = 'submit' value = 'Видалити'>
         </form>
-      <?php } ?>
+      <?php }
+      if($error1 == 1){
+        echo('Користувацькі дані заняті');
+      } ?>
+    </div>
+    <div id = 'left_container'>
+      <form action = "add_edit_office.php" method="post">
+        <input id = 'home' type = 'submit' value = '' name = 'home'>
+      </form>
     </div>
   </body>
 </html>

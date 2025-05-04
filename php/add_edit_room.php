@@ -6,6 +6,10 @@
     header('Location: ../index.php');
     exit();
   }
+  if(isset($_POST['exit'])){
+    header('Location: admin.php');
+    exit();
+  }
   try{
     if(isset($_POST['title']) && !isset($_POST['changes']) && !isset($_POST['delete'])){
       $query1 = $pdo->prepare('insert into rooms (id, office_id, number, title) values(null, ?, ?, ?);');
@@ -22,7 +26,7 @@
   }
   if(isset($_POST['who'])&&isset($_POST['changes'])){
     $query1 = $pdo->prepare('update rooms set office_id = ?, number = ?, title = ? where id = ?');
-    $query1->bindValue(1, fixi($_POST['oid']), PDO::PARAM_INT);
+    $query1->bindValue(1, fixi($_SESSION['OID']), PDO::PARAM_INT);
     $query1->bindValue(2, fixi($_POST['number']), PDO::PARAM_INT);
     $query1->bindValue(3, fixi($_POST['title']), PDO::PARAM_STR);
     $query1->bindValue(3, fixi($_POST['title']), PDO::PARAM_STR);
@@ -78,6 +82,11 @@
           <input type = 'submit' value = 'Видалити'>
         </form>
       <?php } ?>
+    </div>
+    <div id = 'left_container'>
+      <form method = 'post' action = ''>
+        <input id = 'home' type = 'submit' value = '' name = 'exit'>
+      </form>
     </div>
   </body>
 </html>
