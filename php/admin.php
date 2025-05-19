@@ -35,24 +35,31 @@
         <h1 id = "name_info"><?= fixi($_SESSION['LAST_NAME'] . " " . $_SESSION['NAME'] . " " . $_SESSION['MIDLE_NAME']) ?></h1>
         <h1 id = "office_info"><?= fixi($res['name']) ?></h1>
       </div>
-      <?php if($query->rowCount()){while($row = $query->fetch()){?>
-        <div class="object1">
-          <div class = 'room_info'>
-            <h4>Кількість: <?= $row['number'] ?></h4>
-            <br>
-            <h4><?= $row['title'] ?></h4>
-            <br>
-          </div>
-          <form method = 'post' action = "fill_room.php">
-            <input type = 'hidden' name = 'who' value = <?=$row['id']?>>
-            <input class = 'hided' type = 'submit' value="">
-          </form>
-          <form method = "post" action = "add_edit_room.php" class = 'upp'>
-            <input type = 'hidden' name = 'who' value = <?=$row['id']?>>
-            <input class= "room_edit" type = 'submit' value= "Редагувати" >
-          </form>
+      <div id = 'objectPanel'>
+        <div id = 'objects'>
+          <?php if($query->rowCount()){while($row = $query->fetch()){?>
+            <div class="object1">
+              <form method = 'post' action = "fill_room.php">
+                <input type = 'hidden' name = 'who' value = <?=$row['id']?>>
+                <button type="submit">
+                  <div class = 'room_info'>
+                    <h4>Кількість: <?= $row['number'] ?></h4>
+                    <br>
+                    <h4><?= $row['title'] ?></h4>
+                    <br>
+                  </div>
+                </button>
+              </form>
+              <div class = 'editButton'>
+                <form method = "post" action = "add_edit_room.php" class = 'upp'>
+                  <input type = 'hidden' name = 'who' value = <?=$row['id']?>>
+                  <input class= "room_edit" type = 'submit' value= "Редагувати" >
+                </form>
+              </div>
+            </div>
+          <?php }}?>
         </div>
-      <?php }}?>
+      </div>
     </div>
     <div id = 'left_container'>
       <form method = 'post' action = 'hand_made.php'>

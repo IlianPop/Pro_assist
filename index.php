@@ -29,13 +29,20 @@
             exit();
             break;
           case('working'):
-            $query = $pdo->prepare('select room_workers.office_id as id from users join room_workers on users.id = room_workers.user_id where users.id = ?');
+            $query = $pdo->prepare('select room_workers.office_id as id, room_workers.room_id as roomId from users join room_workers on users.id = room_workers.user_id where users.id = ?');
             $query->bindValue(1, $res['id'], PDO::PARAM_STR);
             $query->execute();
-            $_SESSION['OID'] = $query->fetch()['id'];
-            header("Location: php/employee.php");
-            exit();
-            break;
+            $res = $query->fetch();
+            if($res['roomId'] !== null){
+              $_SESSION['OID'] = $res['id'];
+              header("Location: php/employee.php");
+              exit();
+              break;
+            }
+            else{
+              $err = 'Ви не привязані до жодної кімнати';
+              break;
+            }
           case('service'):
             $query = $pdo->prepare('select rob_graphik.office_id as id from users join rob_graphik on users.id = rob_graphik.user_id where users.id = ?');
             $query->bindValue(1, $res['id'], PDO::PARAM_STR);

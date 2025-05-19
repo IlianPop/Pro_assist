@@ -1,6 +1,15 @@
 <?php
     require_once "dbc.php";
   	session_start();
+	if(isset($_POST['exit'])){
+		unset($_SESSION['STAT']);
+		unset($_SESSION['OID']);
+		unset($_SESSION['NAME']);
+		unset($_SESSION['MIDLE_NAME']);
+		unset($_SESSION['LAST_NAME']);
+		header('Location: ../index.php');
+		exit();
+	}
   	if($_SESSION['STAT']!='service'|| !isset($_SESSION['OID'])){
     	header('Location: ../index.php');
     	exit();
@@ -16,12 +25,13 @@
 <head>
 	<title>Сторінка сервісу</title>
 	<link rel = 'stylesheet' href = '../styles/service.css'>
+	<link rel = 'icon' type="image/jpg" href="../styles/system_images/site.png">
 </head>
 <body>
 	<div class = 'container'>
 		<div id = 'container_info'>
-			<h3 id = 'left_container'><?= $_SESSION['LAST_NAME'] . ' ' . $_SESSION['NAME'] . ' ' . $_SESSION['MIDLE_NAME'] ?></h3>
-			<h3 id = 'right_container'>Робочий персонал</h3>
+			<h3 id = '1left_container'><?= $_SESSION['LAST_NAME'] . ' ' . $_SESSION['NAME'] . ' ' . $_SESSION['MIDLE_NAME'] ?></h3>
+			<h3 id = 'right_container'>Обслуговуючий персонал</h3>
 		</div>
 		<h1>Мої запити</h1>
 		<div id = 'requests_container'>
@@ -34,5 +44,10 @@
 			<?php }} ?>
 		</div>
 	</div>
+	<div id = 'left_container'>
+      <form action = "add_edit_office.php" method="post">
+        <input id = 'home' type = 'submit' value = '' name = 'exit'>
+      </form>
+    </div>
 </body>
 </html>

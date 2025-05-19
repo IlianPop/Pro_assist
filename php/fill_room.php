@@ -30,6 +30,7 @@
 <head>
 	<title>Кімната</title>
 	<link rel = 'stylesheet' href="../styles/fill_room.css">
+	<link rel = 'icon' type="image/jpg" href="../styles/system_images/site.png">
 </head>
 <body>
 	<div id = 'list_container'>
@@ -44,11 +45,12 @@
 		<?php }
 		while($row = $query->fetch()) { ?>
 			<div class = 'item_container'>
-				<h4><?="<b>{$row['id']}</b> {$row['last_name']} {$row['name']}"?></h4>
 				<form method="post" action="fill_room.php" class = 'worker'>
 					<input type="hidden" name = 'who' value="<?=$_POST['who']?>">
 					<input type="hidden" name = 'who1' value="<?=$row['id']?>">
-					<input type="submit" value="-">
+					<button type="submit">
+						<h4 class="smallFont"><?="<b>{$row['id']}</b><br>{$row['last_name']} {$row['name']}"?></h4>
+					</button>
 				</form>
 			</div>
 		<?php } ?>

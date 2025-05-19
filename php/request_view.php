@@ -1,6 +1,10 @@
 <?php
     require_once "dbc.php";
   	session_start();
+	if(isset($_POST['home'])){
+		header('Location: service.php');
+		exit();
+}
   	if($_SESSION['STAT']!='service'|| !isset($_SESSION['OID']) || !isset($_GET['who'])){
     	header('Location: ../index.php');
     	exit();
@@ -26,14 +30,15 @@
 <head>
 	<title>Перегляд запиту</title>
 	<link rel = 'stylesheet' href = '../styles/request_view.css'>
+	<link rel = 'icon' type="image/jpg" href="../styles/system_images/site.png">
 </head>
 <body>
 	<div id = 'container'>
 		<div id = 'container_info'>
-			<h3 id = 'left_container'><?= $res['last'] . ' ' . $res['name'] . ' ' . $res['midle'] ?></h3>
+			<h3 id = 'left_container1'><?= $res['last'] . ' ' . $res['name'] . ' ' . $res['midle'] ?></h3>
 			<h3 id = 'right_container'><?= $res['room'] ?></h3>
 		</div>
-			<div id = 'info_panel'>
+		<div id = 'info_panel'>
 			<h4><?= $res['title'] ?></h4>
 			<h4><?= $res['type'] ?></h4>
 			<p><?= $res['description'] ?></p>
@@ -44,5 +49,10 @@
 			</form>
 		</div>
 	</div>
+	<div id = 'left_container'>
+      <form action = "request_view.php" method="post">
+        <input id = 'home' type = 'submit' value = '' name = 'home'>
+      </form>
+    </div>
 </body>
 </html>

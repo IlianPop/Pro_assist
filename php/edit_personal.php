@@ -42,7 +42,7 @@
     $query->bindValue(6, $_POST['who'], PDO::PARAM_INT);
     $query->execute();
     if($_POST['pass']!=''){
-      $query = $pdo->prepare('update users set pass = ? where id = ?');
+      $query = $pdo->prepare('update users set password = ? where id = ?');
       $query->bindValue(1, password_hash($_POST['pass'], PASSWORD_DEFAULT), PDO::PARAM_STR);
       $query->bindValue(2, $_POST['who'], PDO::PARAM_INT);
       $query->execute();
@@ -77,7 +77,7 @@
         <br>
         <input type = 'password' name = 'pass_repeat' placeholder="Повторіть пароль">
         <br>
-        <div id = 'sys' style="<?php if($res['status']=='service')echo('display: block');else{echo('display: none');}?>">
+        <div id = 'sys' style="<?php if($res['status']=='service')echo('display: flex; flex-direction: column;');else{echo('display: none');}?>">
           <input type = 'text' name = 'role' placeholder = 'Вид діяльності' <?php if(isset($res2['role']))echo("value = '{$res2['role']}'")?>>
           <label>
             <input type = 'checkbox' name = 'days[]' value = 'monday' <?php if(isset($res2['monday']) && $res2['monday']==1)echo("checked = 'checked'")?>>Понеділок

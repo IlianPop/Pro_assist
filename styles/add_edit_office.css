@@ -78,10 +78,13 @@ input:-webkit-autofill {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   position: fixed;
   left: 0;
-  width: 10vh;
-  height: 40vh;
+  width: 5vw;
+  height: 70vh;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 0px 9px 9px 0px;
 }
 #home {
@@ -90,29 +93,5 @@ input:-webkit-autofill {
   height: 5vh;
   background-size: cover;
   opacity: 0.6;
-  position: relative;
-  top: 17vh;
-  right: 0.3vh;
-  border: none;
-  border-radius: 0px;
-}
-#left_container {
-  background-color: #aac8e3;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  position: fixed;
-  left: 0;
-  width: 10vh;
-  height: 40vh;
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 0px 9px 9px 0px;
-}
-#home {
-  background: url("./system_images/home.svg");
-  width: 5vh;
-  height: 5vh;
-  background-size: cover;
-  opacity: 0.6;
-  position: relative;
-  top: 16vh;
+  border-radius: 0.1px;
 }

@@ -21,6 +21,7 @@
     <head>
         <title>Сторінка перегляду запиту</title>
         <link rel = 'stylesheet' href = '../styles/service_answer.css'>
+        <link rel = 'icon' type="image/jpg" href="../styles/system_images/site.png">
     </head>
     <body>
         <div id = 'container'>

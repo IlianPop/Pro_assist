@@ -55,6 +55,13 @@ body {
   border: none;
   border-radius: 9px;
 }
+[value="Вибрати"] {
+  background-color: green;
+  border: none;
+  border-radius: 9px;
+  padding: 1vh;
+  color: white;
+}
 #left_container {
   background-color: #aac8e3;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -65,6 +72,10 @@ body {
   top: 50%;
   transform: translateY(-50%);
   border-radius: 0px 9px 9px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 #home {
   background: url("./system_images/home.svg");
@@ -72,9 +83,6 @@ body {
   height: 5vh;
   background-size: cover;
   opacity: 0.6;
-  position: relative;
-  top: 3vh;
-  left: 2vh;
   border: none;
 }
 #plus {
@@ -83,8 +91,5 @@ body {
   height: 5vh;
   background-size: cover;
   opacity: 0.6;
-  position: relative;
-  left: 2vh;
-  top: 27vh;
   border: none;
 }

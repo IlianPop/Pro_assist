@@ -27,6 +27,7 @@
   <head>
     <title>Присвоїти робочого</title>
     <link rel = 'stylesheet' href="../styles/workers_list.css">
+    <link rel = 'icon' type="image/jpg" href="../styles/system_images/site.png">
   </head>
   <body>
     <div id = 'list_container'>
