@@ -53,7 +53,7 @@
         $query->bindValue(6, password_hash(fixi($_POST['pass']), PASSWORD_DEFAULT), PDO::PARAM_STR);
         $query->bindValue(7, "service", PDO::PARAM_STR);
         $query->execute();
-        $query = $pdo->prepare('insert into rob_graphik (user_id, work_type, monday, tuesday, wednesday, thursday, friday, sathurday, sunday, office_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $query = $pdo->prepare('insert into rob_graphik (user_id, work_type, monday, tuesday, wednesday, thursday, friday, saturday, sunday, office_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $query->bindValue(1, $pdo->lastInsertId(), PDO::PARAM_INT);
         $query->bindValue(2, fixi($_POST['role']), PDO::PARAM_STR);
         $query->bindValue(3, $monday, PDO::PARAM_INT);
